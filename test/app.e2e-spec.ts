@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 describe('AppController (e2e)', () => {
   let app;
@@ -11,13 +12,14 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.useGlobalPipes(new ValidationPipe());
     await app.init();
   });
 
   it('/ (GET): should redirect to docs', () => {
     return request(app.getHttpServer())
       .get('/')
-      .expect(301);
+      .expect(302);
   });
 
   it('/scrapper (POST): should return html data', () => {
@@ -37,14 +39,15 @@ describe('AppController (e2e)', () => {
       .expect(expected);
   });
 
-  it('/scrapper (POST): should fail if ', () => {
+  it('/scrapper (POST): should fail when payload is wrong', () => {
     const input = {
-      wrongKey: '',
+      html: 'html',
+      keys: [{ wrongKey: '' }],
     };
 
     return request(app.getHttpServer())
       .post('/scrapper')
       .send(input)
-      .expect(201);
+      .expect(400);
   });
 });
