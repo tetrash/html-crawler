@@ -18,9 +18,4 @@ export class ScrapperDto {
   @ValidateNested({ each: true })
   @IsInstance(ScrapperKeysDto, {each: true})
   keys: ScrapperKeysDto[];
-
-  constructor(html: string, keys: ScrapperKeysDto[]) {
-    this.html = html;
-    this.keys = keys;
-  }
 }
