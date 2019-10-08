@@ -1,17 +1,11 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { AppService } from './app.service';
-import { ScrapperInput, ScrapperOutput } from './scrapper.interface';
+import { Controller, Get, Redirect } from '@nestjs/common';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
 
-  @Post()
-  scrapHtml(@Body() payload: ScrapperInput): ScrapperOutput {
-    const response = {
-      html: this.appService.scrapHtml(payload),
-    };
-
-    return response;
+  @Get()
+  @Redirect('http://localhost:3000/api')
+  getDocs() {
+    return;
   }
 }

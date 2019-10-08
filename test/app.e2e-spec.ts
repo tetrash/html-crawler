@@ -14,7 +14,13 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (POST)', () => {
+  it('/ (GET): should redirect to docs', () => {
+    return request(app.getHttpServer())
+      .get('/')
+      .expect(301);
+  });
+
+  it('/scrapper (POST): should return html data', () => {
     const input = {
       html: '<p>Polscy siatkarze w półfinale mistrzostw Europy w Lublanie chcieli przełamać złą passę w pojedynkach ze Słoweńcami. W dwóch poprzednich edycjach czempionatu Starego Kontynentu odpadli właśnie po porażkach z tymi rywalami. Niestety tym razem znów się nie udało.</p>',
       keys: [{key: 'mistrzostw Europy', url: 'http://www.infor.pl'}, {key: 'lasami państwowymi', url: 'http://www.dziennik.pl'}],
@@ -25,9 +31,20 @@ describe('AppController (e2e)', () => {
     };
 
     return request(app.getHttpServer())
-      .post('/')
+      .post('/scrapper')
       .send(input)
       .expect(201)
       .expect(expected);
+  });
+
+  it('/scrapper (POST): should fail if ', () => {
+    const input = {
+      wrongKey: '',
+    };
+
+    return request(app.getHttpServer())
+      .post('/scrapper')
+      .send(input)
+      .expect(201);
   });
 });

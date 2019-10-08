@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ObjectLiteral, ScrapperInput } from './scrapper.interface';
 
 @Injectable()
-export class AppService {
+export class ScrapperService {
   scrapHtml(input: ScrapperInput): string {
     // Deal with potential duplicates in an array by mapping it to the object
     const keys: ObjectLiteral = input.keys.reduce((map, obj) => {

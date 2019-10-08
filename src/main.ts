@@ -10,6 +10,7 @@ async function bootstrap() {
     .setTitle(packagejson.name)
     .setDescription(packagejson.description)
     .setVersion(packagejson.version)
+    .setHost('localhost:3000')
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
