@@ -4,7 +4,7 @@ import { Controller, Get, Redirect } from '@nestjs/common';
 export class AppController {
 
   @Get()
-  @Redirect('http://localhost:3000/api')
+  @Redirect('/api')
   getDocs() {
     return;
   }
