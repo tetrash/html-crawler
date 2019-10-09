@@ -18,7 +18,9 @@ export class ScrapperController {
   @Post()
   @ApiConsumes('Application/json')
   @ApiProduces('Application/json')
-  @ApiBadRequestResponse({ description: 'Request\'s body has failed validation' })
+  @ApiBadRequestResponse({
+    description: "Request's body has failed validation",
+  })
   @ApiCreatedResponse({ description: 'Success', type: ScrapperResponseDto })
   @ApiInternalServerErrorResponse({ description: 'Internal server error' })
   scrapHtml(@Body() scrapperInput: ScrapperDto): ScrapperOutput {

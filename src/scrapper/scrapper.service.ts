@@ -10,7 +10,10 @@ export class ScrapperService {
       return map;
     }, {});
 
-    const regex = new RegExp((Object.keys(keys)).join('|'), 'gi');
-    return input.html.replace(regex, matched => `<a href="${keys[matched]}">${matched}</a>`);
+    const regex = new RegExp(Object.keys(keys).join('|'), 'gi');
+    return input.html.replace(
+      regex,
+      matched => `<a href="${keys[matched]}">${matched}</a>`,
+    );
   }
 }

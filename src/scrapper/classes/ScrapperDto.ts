@@ -1,6 +1,13 @@
 import { ApiModelProperty } from '@nestjs/swagger';
 import { ScrapperKeysDto } from './ScrapperKeysDto';
-import { ArrayMinSize, IsArray, IsInstance, IsNotEmpty, IsString, ValidateNested } from 'class-validator';
+import {
+  ArrayMinSize,
+  IsArray,
+  IsInstance,
+  IsNotEmpty,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class ScrapperDto {
@@ -16,6 +23,6 @@ export class ScrapperDto {
   @IsArray()
   @ArrayMinSize(1)
   @ValidateNested({ each: true })
-  @IsInstance(ScrapperKeysDto, {each: true})
+  @IsInstance(ScrapperKeysDto, { each: true })
   keys: ScrapperKeysDto[];
 }

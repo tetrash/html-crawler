@@ -1,6 +1,6 @@
 export interface ScrapperInput {
   html: string;
-  keys: Array<{ key: string, url: string }>;
+  keys: Array<{ key: string; url: string }>;
 }
 
 export interface ScrapperOutput {
